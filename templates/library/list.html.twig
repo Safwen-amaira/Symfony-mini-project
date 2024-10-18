@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Library List</title>
+    </head>
+    <body>
+        <h1>Library List</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Website</th>
+                    <th>Date of Creation</th>
+                    <th>Authors</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for library in list %}
+                <tr>
+                    <td>{{ library.id }}</td>
+                    <td>{{ library.name }}</td>
+                    <td><a href="{{ library.website }}">{{ library.website }}</a></td>
+                    <td>{{ library.dateCreation|date('Y-m-d') }}</td>
+                    <td>
+                        {% for author in library.authors %}
+                            {{ author.name }}{% if not loop.last %}, {% endif %}
+                        {% else %}
+                            No authors available
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_update_library', { id: library.id }) }}">Edit</a>
+                        <a href="{{ path('app_delete_library', { id: library.id }) }}" onclick="return confirm('Are you sure you want to delete this library?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="{{ path('app_library') }}">Add New Library</a>
+    </body>
+</html>

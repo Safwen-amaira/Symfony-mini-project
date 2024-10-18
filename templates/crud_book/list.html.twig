@@ -1,0 +1,14 @@
+<html>
+    <head></head>
+    <body>
+        <table>
+            <tr>id</tr><tr>name</tr>
+            <tr {% for book in list %}>
+                <td>{{ book.id }}</td>
+                <td>{{ book.author_id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.nbr_page }}</td>
+            </tr {% endfor %}>
+        </table>
+    </body>
+</html>
